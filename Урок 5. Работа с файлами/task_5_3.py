@@ -11,9 +11,9 @@ with open('salary_1.txt','r') as sal_t:
         if float(sal_a[1]) < 20000:
             poor.append(sal_a[0])
         sal.append(sal_a[1])
-    
-
-print(f'Оклад меньше 20.000 {poor}, средний оклад {sum(map(float, sal)) / len(sal)}')
+        
+   
+print(f'Оклад меньше 20.000 {poor}, средний оклад: ' + "%.2f" % (sum(map(float, sal)) / len(sal)))
 
 
 
