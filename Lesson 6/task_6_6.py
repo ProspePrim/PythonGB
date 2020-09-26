@@ -1,46 +1,31 @@
-# Реализовать класс Stationery (канцелярская принадлежность). 
-# Определить в нем атрибут title (название) и метод draw (отрисовка). 
-# Метод выводит сообщение “Запуск отрисовки.” 
-# Создать три дочерних класса Pen (ручка), Pencil (карандаш), Handle (маркер). 
-# В каждом из классов реализовать переопределение метода draw. 
-# Для каждого из классов метод должен выводить уникальное сообщение. 
-# Создать экземпляры классов и проверить, что выведет описанный метод для каждого экземпляра.
+class Stationery:
+    title: str
 
-class Stationary:
     def __init__(self, title):
         self.title = title
 
     def draw(self):
-        return f'Запуск: "{self.title}"'
+        print('Запуск отрисовки')
 
-
-class Pen(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
-
+class Pen(Stationery):
     def draw(self):
-        return f'Вы взяли: {self.title}. Запуск режима "Ручка"'
+        print('Ручка пишет')
 
-
-class Pencil(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
-
+class Pencil(Stationery):
     def draw(self):
-        return f'Вы взяли: {self.title}. Запуск режима "Карандаш"'
+        print('Карандаш рисует')
 
-
-class Handle(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
-
+class Handle(Stationery):
     def draw(self):
-        return f'Вы взяли: {self.title}. Запуск режима "Маркер"'
+        print('Маркер рисует')
 
 
-pen = Pen('Ручка')
-pencil = Pencil('Карандаш')
+stationery = Stationery('unknown')
+pen = Pen('ручка')
+pencil =Pencil ('карандаш')
 handle = Handle('Маркер')
-print(pen.draw())
-print(pencil.draw())
-print(handle.draw())
+
+stationery.draw()
+pen.draw()
+pencil.draw()
+handle.draw()
