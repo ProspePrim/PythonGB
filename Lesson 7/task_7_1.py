@@ -1,47 +1,42 @@
-#Реализовать класс Matrix (матрица). Обеспечить перегрузку конструктора класса (метод init()), 
-# который должен принимать данные (список списков) для формирования матрицы.
-#Подсказка: матрица — система некоторых математических величин, расположенных в виде прямоугольной схемы.
-#Примеры матриц: см. в методичке.
+class Cell:
+    cells: int
 
-#Следующий шаг — реализовать перегрузку метода str() для вывода матрицы в привычном виде.
-#Далее реализовать перегрузку метода add() для реализации операции сложения двух объектов класса Matrix (двух матриц). 
-
-# Результатом сложения должна быть новая матрица.
-#Подсказка: сложение элементов матриц выполнять поэлементно — 
-# первый элемент первой строки первой матрицы складываем с первым элементом первой строки второй матрицы и т.д.
-
-
-class Matrix:
-    def __init__(self, list_1, list_2):
-        # self.matr = [list_1, list_2]
-        self.list_1 = list_1
-        self.list_2 = list_2
-
-    def __add__(self):
-        matr = [[0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0]]
-
-        for i in range(len(self.list_1)):
-
-            for j in range(len(self.list_2[i])):
-                matr[i][j] = self.list_1[i][j] + self.list_2[i][j]
-
-        return str('\n'.join(['\t'.join([str(j) for j in i]) for i in matr]))
-
+    def __init__(self, cells: int):
+        self.cells = cells
 
     def __str__(self):
-        return str('\n'.join(['\t'.join([str(j) for j in i]) for i in matr]))
+        return str(self.cells)
+
+    def __int__(self):
+        return self.cells
+
+    def __add__(self, cells: 'Cell'):
+        return Cell(self.cells + cells.cells)
+
+    def __sub__(self, cells: 'Cell'):
+        if (result := self.cells - cells.cells) < 0:
+            return "Р Р°Р·РЅРёС†Р° РјРµРЅСЊС€Рµ РЅСѓР»СЏ"
+        else:
+            return Cell(result)
+
+    def __mul__(self, cells: 'Cell'):
+        return Cell(self.cells * cells.cells)
+
+    def __truediv__(self, cells: 'Cell'):
+        return Cell(self.cells - cells.cells)
+
+    @staticmethod
+    def make_order(cell: 'Cell', n: int):
+        fullrow, lastrow = divmod(cell.cells, n)
+        return '\n'.join([str('*') * n for _ in range(0, fullrow)]) + '\n' + '*' * lastrow
 
 
-
-my_matrix = Matrix([[4, 3, 5],
-                    [65, 18, 25],
-                    [40, 45, 96]],
-                   [[32, 12, 35],
-                    [9, 10, 25],
-                    [37, 96, 13]])
-# result = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-
-
-print(my_matrix.__add__())
+cell0 = Cell(5)
+cell1 = Cell(10)
+cell2 = Cell(12)
+print('cell0 + cell2', cell0 + cell2)
+print('cell1 - cell2', cell1 - cell2)
+print('cell2 - cell1', cell2 - cell1)
+print('cell0 * cell1', cell0 * cell1)
+print('cell1 / cell0', cell1 / cell0)
+print(cell1.make_order(cell1, 4))
